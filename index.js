@@ -5,7 +5,7 @@ const app = express()
 var cors = require("cors");
 
 app.use(cors({
-    origin: 'http://localhost:8080'
+    origin: 'https://youtubenks.netlify.app/'
 }))
 
 app.get('/download', async (req, res) => {
