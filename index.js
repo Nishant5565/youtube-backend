@@ -4,9 +4,22 @@ const ytdl = require('ytdl-core')
 const app = express()
 var cors = require("cors");
 
-app.use(cors({
-    origin: 'https://youtubenks.netlify.app/'
-}))
+const allowedOrigins = [
+  'https://youtubenks.netlify.app',
+    'http://localhost:5173/'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 
 app.get('/download', async (req, res) => {
     try {
